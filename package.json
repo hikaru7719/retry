@@ -1,0 +1,12 @@
+{
+  "name": "retry",
+  "version": "0.0.1",
+  "description": "implementation of retry function",
+  "main": "index.js",
+  "repository": "https://github.com/hikaru7719/retry.git",
+  "author": "hikaru7719",
+  "license": "MIT",
+  "devDependencies": {
+    "typescript": "^3.9.7"
+  }
+}
