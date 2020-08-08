@@ -1,4 +1,4 @@
-type Context = {
+export type Context = {
   attempted: number;
   abort: boolean;
 };
@@ -7,7 +7,7 @@ type Callback<T> = (context: Context) => Promise<T>;
 
 type Config = {
   attmept: number;
-  timeout: number;
+  timeout?: number;
 };
 
 function init(): Context {
@@ -22,6 +22,7 @@ function doFunc<T>(
   config: Config,
   context: Context
 ): Promise<T> {
+  context.attempted++;
   return new Promise((resolve, reject) => {
     callback(context)
       .then((value) => {
@@ -29,8 +30,7 @@ function doFunc<T>(
       })
       .catch((err) => {
         if (context.attempted < config.attmept) {
-          context.attempted++;
-          return doFunc(callback, config, context);
+          resolve(doFunc(callback, config, context));
         }
         reject(err);
       });
